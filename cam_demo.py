@@ -36,8 +36,8 @@ while True:
 		center_y = (2*y+h)/2
 		width = w
 		height = h
-		cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-		cv2.circle(frame, (center_x, center_y), 10, (0, 0, 255), 2)
+		#cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+		#cv2.circle(frame, (center_x, center_y), 10, (0, 0, 255), 2)
 		print([center_x, center_y])
 		if center_x > 350:
 			print("Please turn camera right");
@@ -46,6 +46,8 @@ while True:
 
 		if anterior != len(faces):
 			anterior = len(faces)
+		print(frame)
+		cv2.imwrite('bla.jpg', frame[y:y+h, x:x+w])
 
 	# Display the resulting frame
 	cv2.imshow('Video', frame)

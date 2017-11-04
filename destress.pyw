@@ -3,8 +3,8 @@ import cv2
 import sys
 import logging as log
 import datetime as dt
-import serial
 import alt_facializer as facializer
+import mom
 
 # Basic setup
 cascPath = "haarcascade_frontalface_default.xml"
@@ -15,7 +15,8 @@ log.info("Starting video capture")
 video_capture = cv2.VideoCapture(1)
 anterior = 0
 stress = 0
-stress_threshold = 11
+stress_threshold = 40
+message_wait = 0
 while True:
 	if not video_capture.isOpened():
 		log.info('Unable to load camera.')
@@ -49,11 +50,16 @@ while True:
                 state = facializer.getState("bla.jpg")[0]
                 if state == "stressed":
                     stress+=1
+                    if message_wait > 0:
+                        message_wait -= 1
                 else:
                     stress = 0;
                 sys.stdout.write(str(stress)+state+" \r")
                 if stress >= stress_threshold:
-                    print "Chill"
+                    if message_wait <= 0:
+                        mom.chill()
+                        stress = 0
+                        message_wait = 40
 
 	# Display the resulting frame
 	#cv2.imshow('Video', frame)

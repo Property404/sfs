@@ -220,7 +220,7 @@ def validate(data_folder_path):
     dirs = os.listdir(data_folder_path)
     faces = []
     labels = []
-    confidence_threshold = 0.0
+    confidence_threshold = 0.10
     for dir_name in dirs:
 
         if not dir_name.startswith("s"):
@@ -318,10 +318,13 @@ def main(capture, confidence_threshold):
         prediction = predict(test_img, confidence_threshold)
         return False
     #print("Prediction complete")
+    return prediction
+    """
     if prediction == subjects[2]:
         return True
     else:
         return False
+    """
     #display all images
     #cv2.imshow(subjects[2], cv2.resize(predicted_img, (400, 500)))
     #cv2.waitKey(0)
@@ -363,17 +366,19 @@ face_recognizer.train(faces, np.array(labels))
 confidence_threshold = validate(validation_location)
 
 
-def isCorrectFace(capture):
-	return main(capture, confidence_threshold)
+def getState(capture):
+    return main(capture, confidence_threshold)
+def isStressed(capture):
+    return getState(capture) == "stressed"
 
 if __name__=="__main__":
     print("TESTING")
-    for name in os.listdir("training-data/s1"):
+    for name in os.listdir("training-data/s2"):
         if name[0]  == ".":
             continue
-        fulldir = "training-data/s1/"+name
+        fulldir = "training-data/s2/"+name
 
-        print(isCorrectFace(fulldir))
+        print(isStressed(fulldir))
     
 
 # Use like so: from facializer import isCorrectFace

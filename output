@@ -1,0 +1,30 @@
+Preparing data...
+
+NFD:training-data/s1/10.jpg
+NFD:training-data/s1/7.jpg
+NFD:training-data/s1/8.jpg
+NFD:training-data/s1/9.jpg
+NFD:training-data/s2/10.jpg
+NFD:training-data/s2/4.jpg
+NFD:training-data/s2/6.jpg
+NFD:training-data/s2/9.jpg
+Data prepared
+Total faces: 16
+Total labels: 16
+[1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+
+TESTING
+True
+False
+True
+True
+True
+True
+True
+True
+False
+True
+False
+True
+True
+False
